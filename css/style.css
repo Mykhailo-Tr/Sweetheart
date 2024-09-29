@@ -205,9 +205,38 @@ body:has([value="zoom-scroll"]:checked) .content {
     height: 100;
   }
 }   */
-img {
+/* img {
   height: 100%;
+  z-index: -9999;
+} */
+/* General styles for images */
+img {
+  width: 100%; /* Makes the image take the full width of its container */
+  height: auto; /* Maintains the aspect ratio */
+  transition: transform 0.5s ease; /* Smooth transition effect */
 }
-p, h4{
+
+/* Media query for smaller devices */
+@media only screen and (max-width: 600px) {
+  img {
+    transform: scale(0.9); /* Slightly reduce size for smaller screens */
+  }
+}
+
+/* Media query for tablets */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  img {
+    transform: scale(1.1); /* Slightly increase size for tablets */
+  }
+}
+
+/* Media query for larger screens */
+@media only screen and (min-width: 1025px) {
+  img {
+    transform: scale(1.2); /* Further increase size for larger screens */
+  }
+}
+
+p, h4, h6{
   align-content: center;
 }
