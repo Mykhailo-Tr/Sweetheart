@@ -15,6 +15,10 @@ body,
   background-color: var(--color-background, black);
   
 }
+body{
+  margin: 0;
+  padding: 0;
+}
 
 main {
   view-timeline: --main;
