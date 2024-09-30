@@ -1,15 +1,11 @@
 @layer base, rhythm, layout, components, default, overwrites;
 
 html {
-  /* Create a snapping rule on the html element */
   scroll-snap-type: y mandatory;
 
-  /* Create a timeline scope, so we can target any element on the page */
   timeline-scope: --section, --main, --site-header;
 }
 
-/* We'll want to match these colors for the best melty effect */
-/* But play around with them (and add a color to section) to see happens */
 body,
 .content {
   background-color: var(--color-background, black);
@@ -25,24 +21,19 @@ main {
 }
 
 .section {
-  /* Creating a snapping rule on the section element */
   scroll-snap-align: start;
   scroll-snap-stop: always;
 
-  /* Attach the timeline to the section element*/
   view-timeline: --section;
 
-  /* Set each section to the full dynamic height of the viewport */
   height: 100dvh;
 }
 
 .content {
-  /* Fix the content, so it doesn't scroll with the section */
   overflow: hidden;
   position: fixed;
   inset: 0;
 
-  /* Animate the content based on the section scrolling */
   --contrast: 4;
   --blur: 0.5rem;
 
@@ -65,19 +56,12 @@ main {
   }
 }
 
-/* 
-  This is a bit of a hack to get the indicator to work because I'm lazy.
-  We're translating the dot from the top to the bottom of its parent,
-  using the browser scroll position as the animation timeline.
-  It's not really matched up to the scrolling sections, only appears to be.
-*/
 .indicator::before {
   animation: indicate linear both;
   animation-timeline: --main;
   animation-range: contain;
 }
 
-/* And we're manually setting the colors because see: lazy comment above */
 @keyframes indicate {
   0% {
     --color-indicator: var(--color-primary);
@@ -104,8 +88,6 @@ main {
   }
 }
 
-/* Remove gradient indicator on scroll-to-end (visible on small screens */
-
 .site-header label:last-of-type {
   view-timeline: --site-header inline;
 }
@@ -126,14 +108,7 @@ main {
   }
 }
 
-/* Change animation based on radio checked */
 body:has([value="horizontal-scroll"]:checked) .content {
-  /* 
-    The only reason we're repeat these two properties instead of simply 
-    setting `animation-name` is so the polyfill will pick them up 
-    They're flaky though and tend to get stuck. You might need to
-    refresh the page and select an option before scrolling
-  */
   animation: horizontal-scroll ease-in-out both;
   animation-timeline: --section;
 }
@@ -148,8 +123,6 @@ body:has([value="zoom-scroll"]:checked) .content {
   animation-timeline: --section;
 }
 
-/* Alternative animations */
-/* Very cool, try it */
 @keyframes horizontal-scroll {
   0% {
     transform: translate3d(100%, 0%, 0);
@@ -164,7 +137,6 @@ body:has([value="zoom-scroll"]:checked) .content {
   }
 }
 
-/* Befuddling, try it */
 @keyframes backwards-scroll {
   0% {
     transform: translate3d(0%, -100%, 0);
@@ -179,7 +151,6 @@ body:has([value="zoom-scroll"]:checked) .content {
   }
 }
 
-/* WIP */
 @keyframes zoom-scroll {
   0% {
     filter: blur(5rem);
@@ -203,41 +174,27 @@ body:has([value="zoom-scroll"]:checked) .content {
   }
 }
 
-/* @media only screen and (max-width: 600px) {
-  img {
-    margin-top: 20%;
-    height: 100;
-  }
-}   */
-/* img {
-  height: 100%;
-  z-index: -9999;
-} */
-/* General styles for images */
 img {
-  width: 100%; /* Makes the image take the full width of its container */
-  height: auto; /* Maintains the aspect ratio */
-  transition: transform 0.5s ease; /* Smooth transition effect */
+  width: 100%;
+  height: auto; 
+  transition: transform 0.5s ease; 
 }
 
-/* Media query for smaller devices */
 @media only screen and (max-width: 600px) {
   img {
-    transform: scale(0.9); /* Slightly reduce size for smaller screens */
+    transform: scale(0.9); 
   }
 }
 
-/* Media query for tablets */
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
   img {
-    transform: scale(1.1); /* Slightly increase size for tablets */
+    transform: scale(1.1);
   }
 }
 
-/* Media query for larger screens */
 @media only screen and (min-width: 1025px) {
   img {
-    transform: scale(1.2); /* Further increase size for larger screens */
+    transform: scale(1.2);
   }
 }
 
